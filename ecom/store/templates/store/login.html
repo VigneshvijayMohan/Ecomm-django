@@ -1,0 +1,48 @@
+{% extends 'store/base.html' %}
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Login</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Log In To Your Account...</p>
+        </div>
+    </div>
+</header>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card border-0 rounded-3 shadow-lg p-5">
+                <form method="POST" action="{% url 'login' %}" class="mb-3">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password">
+                    </div>
+                    <br/><br/>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dark btn-lg">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+
+{% endblock %}
