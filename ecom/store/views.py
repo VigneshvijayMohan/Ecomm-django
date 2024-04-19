@@ -13,12 +13,13 @@ from django import forms
 
 def home(request):
     products = Product.objects.all()
-    categories = set(product.category for product in products)
+    categories = get_categories()
     return render(request, "store/home.html", {"products":products, "categories":categories})
 
 
 def about(request):
-    return render(request, "store/about.html", {})
+    categories = get_categories()
+    return render(request, "store/about.html", {"categories":categories})
 
 
 def login_user(request):
@@ -34,7 +35,8 @@ def login_user(request):
             messages.success(request, ("There was an error, please try again."))
             return redirect('login')
     else: 
-        return render(request, "store/login.html", {})
+        categories = get_categories()
+        return render(request, "store/login.html", {"categories":categories})
 
 
 def logout_user(request):
@@ -66,13 +68,20 @@ def register_user(request):
 
 def product(request, pk):
     product = Product.objects.get(id=pk)
-    return render(request, "store/product.html", {"product":product})
+    categories = get_categories()
+    return render(request, "store/product.html", {"product":product, "categories":categories})
 
 def category(request, foo):
     foo = foo.replace("-", " ")
     products = Product.objects.filter(category__name=foo)
+    categories = get_categories()
+    return render(request, "store/home.html", {"products":products, "categories":categories})
+
+
+
+def get_categories():
     all_products = Product.objects.all()
     categories = set(product.category for product in all_products)
-    return render(request, "store/home.html", {"products":products, "categories":categories})
+    return categories
 
 
